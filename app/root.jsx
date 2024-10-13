@@ -1,4 +1,3 @@
-import { json } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -6,7 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
-  useLoaderData,
+  useRouteLoaderData,
   useRouteError,
 } from '@remix-run/react';
 import { getThemeFromCookies } from './.server/theme';
@@ -15,7 +14,7 @@ import styles from './tailwind.css?url';
 
 export async function loader({ request }) {
   const theme = await getThemeFromCookies(request);
-  return json({ theme });
+  return { theme };
 }
 
 export const links = () => [
@@ -29,11 +28,12 @@ export const links = () => [
   { rel: 'stylesheet', href: styles },
 ];
 
-export default function App() {
-  const { theme } = useLoaderData();
+export function Layout({ children }) {
+  const data = useRouteLoaderData('root');
+  const theme = data.theme ?? 'light';
 
   return (
-    <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
+    <html lang="en" className={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,10 +53,10 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="relative grid min-h-screen font-sans text-sand-12 antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] selection:bg-amber-6 dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
+      <body className="relative grid min-h-screen font-sans text-sand-12 antialiased selection:bg-amber-6 before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
         <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
           <Header theme={theme} />
-          <Outlet />
+          {children}
           <footer className="py-4 text-sand-11 text-sm" />
         </main>
         {process.env.NODE_ENV !== 'development' && (
@@ -72,6 +72,10 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export default function App() {
+  return <Outlet />;
 }
 
 export function ErrorBoundary() {
