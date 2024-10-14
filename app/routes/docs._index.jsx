@@ -1,5 +1,5 @@
-import { redirect } from '@remix-run/node';
+import { redirect } from 'react-router';
 
-export async function loader({ params }) {
+export async function loader() {
   throw redirect('/docs/installation');
 }

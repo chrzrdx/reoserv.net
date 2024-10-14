@@ -1,5 +1,5 @@
-import { redirect } from '@remix-run/node';
-import { NavLink, useLoaderData } from '@remix-run/react';
+import { redirect } from 'react-router';
+import { NavLink, useLoaderData } from 'react-router';
 import { getDocsPage } from '../.server/get-docs-page';
 import { ProseContainer } from '../components/prose-container';
 

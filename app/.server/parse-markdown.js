@@ -24,9 +24,9 @@ async function parseMarkdown(filepath, { clockOffset } = { clockOffset: 0 }) {
     .use({ async: true, gfm: true })
     .use({
       renderer: {
-        code(code, lang) {
-          return highlighter.codeToHtml(code, {
-            lang: lang || 'text',
+        code(code) {
+          return highlighter.codeToHtml(code.text ?? '', {
+            lang: code.lang || 'text',
             theme: 'github-dark-dimmed',
           });
         },

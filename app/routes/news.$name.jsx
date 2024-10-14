@@ -1,5 +1,5 @@
-import { redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { redirect } from 'react-router';
+import { useLoaderData } from 'react-router';
 import { getNewsArticle } from '../.server/get-news-article';
 import { ProseContainer } from '../components/prose-container';
 

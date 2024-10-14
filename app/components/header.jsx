@@ -1,8 +1,8 @@
-import { Link, NavLink, useFetcher } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
 import { LuMoon, LuSun } from 'react-icons/lu';
 import { SiKofi } from 'react-icons/si';
+import { Link, NavLink, useFetcher } from 'react-router';
 import logo from '../assets/images/logo-full.png?as=metadata';
 
 const getLinkClasses = (active = false) =>

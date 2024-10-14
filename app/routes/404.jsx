@@ -1,5 +1,5 @@
-import { json } from '@remix-run/node';
-import { Link, useLoaderData } from '@remix-run/react';
+import { json } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import etag from '../.server/etag';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';

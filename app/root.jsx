@@ -5,9 +5,9 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
-  useRouteLoaderData,
   useRouteError,
-} from '@remix-run/react';
+  useRouteLoaderData,
+} from 'react-router';
 import { getThemeFromCookies } from './.server/theme';
 import { Header } from './components/header';
 import styles from './tailwind.css?url';

@@ -1,7 +1,6 @@
-import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
+import { json } from 'react-router';
 import etag from '../.server/etag';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
@@ -36,12 +35,12 @@ export async function loader({ request }) {
     });
   } catch (e) {
     console.error('There was an error getting the articles / commit feed', e);
-    return json([]);
+    return json({ commits: [], articles: [], release: null });
   }
 }
 
-export default function Index() {
-  const { commits, articles, release } = useLoaderData();
+export default function Index({ loaderData }) {
+  const { commits, articles, release } = loaderData;
 
   return (
     <Layout commits={commits} release={release}>
